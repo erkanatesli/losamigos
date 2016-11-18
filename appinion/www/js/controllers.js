@@ -5,6 +5,7 @@ angular.module('app.controllers', [])
 
         $scope.chartProvider = false;
         $scope.input = '';
+        $scope.waarde = 90;
         
         var connectionURL = 'http://demo8089816.mockable.io/search';
 
@@ -14,6 +15,7 @@ angular.module('app.controllers', [])
             BlankFactory.postFunction(connectionURL, $scope.input)
                 .then(function(response) {
                     $scope.chartProvider = true;
+                    $scope.waarde = response.rating;
                     console.log('response', response);
                 });
         }
@@ -28,17 +30,18 @@ angular.module('app.controllers', [])
     return {
         restrict: 'E',
         scope: {
-            onCreate: '&'
+            onCreate: '&',
+            waarde: '='
         },
         link: function($scope, $element, $attr) {
-
+            console.log('Scope', $scope);
             function initialize() {
 
                 Morris.Donut({
                     element: 'donut-example',
                     data: [
-                        { label: "Negative", value: 80 },
-                        { label: "Positive", value: 20 }
+                        { label: "Negative", value: $scope.waarde },
+                        { label: "Positive", value: 100-$scope.waarde}
                     ],
                     colors: [
                         'tomato',
