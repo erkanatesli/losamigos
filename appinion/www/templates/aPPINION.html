@@ -1,9 +1,11 @@
 <ion-view title="APPINION" id="page1">
-  <ion-content padding="true" class="has-header">
+  <ion-content ng-controller="aPPINIONCtrl as ctrl" padding="true" class="has-header">
     <form id="aPPINION-form1" class="list">
-      <label class="item item-input" id="aPPINION-textarea1">
-        <span class="input-label"></span><textarea placeholder=""></textarea></label>
+      <label class="item item-input">
+        <input type="text" ng-model="input" placeholder="Keyword">
+      </label>
     </form>
-    <button id="aPPINION-button3" class="button button-positive  button-block">Search opinions</button>
+    <!--<button id="aPPINION-button3" class="button button-positive  button-block" ng-click="ctrl.searchOpinions()">Search opinions</button>-->
+    <button id="aPPINION-button4" class="button button-positive  button-block" ng-click="submit()">test POST</button>
   </ion-content>
 </ion-view>
