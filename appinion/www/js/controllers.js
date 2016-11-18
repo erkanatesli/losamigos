@@ -1,20 +1,54 @@
 angular.module('app.controllers', [])
 
-.controller('aPPINIONCtrl', ['$scope', '$http', '$stateParams', '$ionicLoading', 'BlankFactory',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
-// You can include any angular dependencies as parameters for this function
-// TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $http, $stateParams, $ionicLoading, BlankFactory) {
-  var vm = this;
+.controller('aPPINIONCtrl', ['$scope', '$stateParams', '$state', 'BlankFactory',
+    function($scope, $stateParams, $state, BlankFactory) {
 
-  vm.searchOpinions = function(input) {
-    console.log('init search');
+        $scope.chartProvider = true;
 
-    console.log($scope.input);
-  };
+        $scope.submit = function() {
+            console.log('launching request...');
+            BlankFactory.postFunction($scope.input);
+        }
 
-  $scope.submit = function(){
-    console.log('launching request...');
-    BlankFactory.postFunction($scope.input);
-  }
+    }
+])
 
-}]);
+.directive('appiniondonut', function() {
+    // var toDestroy = angular.element(document.querySelector('#chartjs'));
+    // toDestroy.remove();
+    console.info('directive appiniondonut');
+    return {
+        restrict: 'E',
+        scope: {
+            onCreate: '&'
+        },
+        link: function($scope, $element, $attr) {
+
+            function initialize() {
+
+                Morris.Donut({
+                    element: 'donut-example',
+                    data: [
+                        { label: "Negative", value: 80 },
+                        { label: "Positive", value: 20 }
+                    ],
+                    colors: [
+                        'tomato',
+                        '#39B580',
+                        'wheat'
+                    ],
+                    resize: true
+                });
+            } // end fn initialize
+
+            if (document.readyState === "complete") {
+                console.log('initialize');
+                initialize();
+            } else {
+                initialize(); // had to force start it :(
+                console.info('event.addDomListener');
+                // Morris.Donut.event.addDomListener(window, 'load', initialize);
+            }
+        }
+    }
+})
