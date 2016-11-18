@@ -3,11 +3,19 @@ angular.module('app.controllers', [])
 .controller('aPPINIONCtrl', ['$scope', '$stateParams', '$state', 'BlankFactory',
     function($scope, $stateParams, $state, BlankFactory) {
 
-        $scope.chartProvider = true;
+        $scope.chartProvider = false;
+        $scope.input = '';
+        
+        var connectionURL = 'http://demo8089816.mockable.io/search';
 
         $scope.submit = function() {
             console.log('launching request...');
-            BlankFactory.postFunction($scope.input);
+
+            BlankFactory.postFunction(connectionURL, $scope.input)
+                .then(function(response) {
+                    $scope.chartProvider = true;
+                    console.log('response', response);
+                });
         }
 
     }
