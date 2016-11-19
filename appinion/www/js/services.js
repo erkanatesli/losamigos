@@ -2,20 +2,21 @@ angular.module('app.services', [])
 
 .factory('BlankFactory', ['$http', '$q', '$ionicLoading', function($http, $q, $ionicLoading) {
 
-    function postFunction(url, parameters) {
-        console.log('postFunction', parameters);
-
-        var postData = {
-            parameters: parameters
-        };
+    function getAnalysis(parameters) {
+        console.log('getAnalysis', parameters);
+        var url = 'http://node7.codenvy.io:37728/appinion-service/public/api/v1/search?query='  + parameters;
+        console.log('URL:', url);
+        // var postData = {
+        //     parameters: parameters
+        // };
 
         var deferred = $q.defer();
         $ionicLoading.show();
 
         $http({
                 url: url,
-                data: postData,
-                method: "POST",
+                // data: postData,
+                method: "GET",
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -35,7 +36,7 @@ angular.module('app.services', [])
     }
 
     return {
-        postFunction: postFunction
+        getAnalysis: getAnalysis
     };
 
 }])

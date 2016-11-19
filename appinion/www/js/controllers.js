@@ -43,19 +43,20 @@ angular.module('app.controllers', [])
         $scope.chartProvider = false;
         $scope.waarde = 90;
 
-        var connectionURL = 'http://demo8089816.mockable.io/search';
 
         $scope.submit = function() {
             var inputArray = $('#tags').children("span");
             var parsedInput = [];
             console.log('inputArray = ' + inputArray);
+            console.log('length = ' + inputArray.length);
+
             for (var i = 0; i < inputArray.length; i++) {
                 console.log('tag ' + i + ' = ' + inputArray[i].innerText);
                 parsedInput.push(inputArray[i].innerText);
             }
-            console.log('parsedInput = ' + parsedInput);
+            // console.log('parsedInput = ' + parsedInput);
 
-            BlankFactory.postFunction(connectionURL, parsedInput)
+            BlankFactory.getAnalysis(parsedInput)
                 .then(function(response) {
                     $scope.chartProvider = true;
                     $scope.waarde = response.rating;
