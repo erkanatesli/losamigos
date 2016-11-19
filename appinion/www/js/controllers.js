@@ -81,17 +81,19 @@ angular.module('app.controllers', [])
                     console.log('tag ' + i + ' = ' + inputArray[i].innerText);
                     parsedInput.push(inputArray[i].innerText);
                 }
-                console.log('parsedInput = ' + parsedInput);
+                // console.log('parsedInput = ' + parsedInput);
                 BlankFactory.getAnalysis(parsedInput)
                     .then(function(response) {
-                        console.log('response', response);
-
-                        $scope.infoAvailable = true;
-                        $scope.waarde = Math.ceil((0.5 + (response.trust_value * 0.5)) * 100);
+                        console.log('Response: ', response);
                         $scope.data = response;
+                        $scope.infoAvailable = true;
+
+                        $scope.trust_value = Math.ceil((0.5 + (response.trust_value * 0.5)) * 100);
+                        $scope.certainty = Math.ceil((0.5 + (response.certainty * 0.5)) * 100);
 
 
-                        console.log('Percentage: ', $scope.waarde, '%');
+
+                        console.log('Percentage: ', $scope.trust_value, '%');
                     });
             }, 100);
         };
@@ -132,51 +134,45 @@ angular.module('app.controllers', [])
             });
 
             attrs.$observe('value', function(val) {
-                // console.log('VALUE changed', val, $scope)
-                // console.log('Morris', morris);
+                console.log('VALUE changed', val, $scope)
+                console.log('Morris', morris);
                 if (!morris) {
                     console.log('creating chart');
-
-                    if (document.readyState === "complete") {
-
-                        // console.log('initialize');
-                        initialize();
-                    } else {
-                        initialize(); // had to force start it :(
-                        // console.info('event.addDomListener');
-                        // Morris.Donut.event.addDomListener(window, 'load', initialize);
-                    }
-
+                    console.log('Atrrs', attrs);
+                    morris = Morris.Donut({
+                        element: 'donut-appinion',
+                        data: [
+                            { label: "Negative", value: 100 - parseInt(attrs.value), formatted: 100 - parseInt(attrs.value) + '%' },
+                            { label: "Positive", value: parseInt(attrs.value), formatted: parseInt(attrs.value) + '%' }
+                        ],
+                        formatter: function(x, data) {
+                            return data.formatted;
+                        },
+                        labelColor: '#387ef5',
+                        colors: [
+                            'red',
+                            '#39B580'
+                        ],
+                        resize: true
+                    }).on('click', function(i, row) {
+                        console.log(i, row);
+                    });
                 } else {
                     // console.log('setting chart waarde');
-                    morris.setData([
-                        { label: "Negative", value: 100 - parseInt(attrs.value), formatted: 100 - parseInt(attrs.value) + '%' },
-                        { label: "Positive", value: parseInt(attrs.value), formatted: parseInt(attrs.value) + '%' }
-                    ]);
+                    morris.setData([{
+                        label: "Negative",
+                        value: 100 - parseInt(attrs.trust_value),
+                        formatted: 100 - parseInt(attrs.trust_value) + '%'
+                    }, {
+                        label: "Positive",
+                        value: parseInt(attrs.trust_value),
+                        formatted: parseInt(attrs.trust_value) + '%'
+                    }]);
                 }
             });
 
-            function initialize() {
-                console.log('Atrrs', attrs);
-                morris = Morris.Donut({
-                    element: 'donut-appinion',
-                    data: [
-                        { label: "Negative", value: 100 - parseInt(attrs.value), formatted: 100 - parseInt(attrs.value) + '%' },
-                        { label: "Positive", value: parseInt(attrs.value), formatted: parseInt(attrs.value) + '%' }
-                    ],
-                    formatter: function(x, data) {
-                        return data.formatted;
-                    },
-                    labelColor: '#387ef5',
-                    colors: [
-                        'red',
-                        '#39B580'
-                    ],
-                    resize: true
-                }).on('click', function(i, row) {
-                    console.log(i, row);
-                });
-            }
+
+
 
 
         }

@@ -19,7 +19,7 @@
                     We have scanned {{data.debug.found_sources}} sources for you which the certainty is {{data.certainty*100 | number : 1}}%
                 </div>
             </div>
-            <appiniondonut ng-if="infoAvailable" data-value="{{waarde}}">
+            <appiniondonut ng-if="infoAvailable" data-value="{{trust_value}}" data-certainty="{{certainty}}">
                 <div id="donut-appinion" style="height: 300px; width: 100%;"></div>
                 <center style="padding-top:30px">
                     <button id="aPPINION-button5" style="width:50%; border-width: 2px; border-color: white" class="row-center button button-positive button-block" ng-click="newSearch()">New search</button>
