@@ -1,16 +1,12 @@
 <ion-view hide-nav-bar="true" hide-back-button="false" view-title="" id="page1" class="signup-background">
     <ion-content padding="true" class="has-header">
-        <form id="aPPINION-form1" class="list">
-            <div class="container">
-                <!--<label class="item item-input" id="tags">-->
-                <!--<input type="text" value="" ng-model="inputfield" placeholder="Add a tag" />-->
-                <!--</label>-->
-                <label class="item item-input" id="tags">
-                    <input type="text" ng-model="input" id="inputfield" placeholder="Type keyword(s)">
-                </label>
+        <form id="aPPINION-form1" class="list" ng-submit="submit())">
+            <label class="item item-input" id="tags">
+                <input type="text" ng-model="input" id="inputfield" placeholder="Type keyword(s)">
+            </label>
         </form>
         <div ng-controller="aPPINIONCtrl" ng-init="instantize()">
-          <button id="aPPINION-button3" style="border-width: 2px; border-color: white" class="button button-positive  button-block" ng-click="submit()">Search opinions</button>
+            <button id="aPPINION-button3" style="border-width: 2px; border-color: white" class="button button-positive  button-block" ng-click="submit()">Search opinions</button>
             <div class="card" ng-if="infoAvailable">
                 <div class="item item-text-wrap">
                     We have scanned {{data.debug.found_sources}} sources for you which the certainty is {{data.certainty*100 | number : 1}}%
@@ -25,8 +21,6 @@
                     <button id="aPPINION-button5" style="width:50%; border-width: 2px; border-color: white" class="row-center button button-positive button-block" ng-click="newSearch()">New search</button>
                 </center>
             </appiniondonut>
-
-        </div>
         </div>
     </ion-content>
 </ion-view>

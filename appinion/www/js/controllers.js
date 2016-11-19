@@ -41,7 +41,6 @@ angular.module('app.controllers', [])
         });
 
         $scope.infoAvailable = false;
-        $scope.waarde = 90;
 
         window.Morris.Donut.prototype.setData = function(data, redraw) {
             if (redraw == null) {
