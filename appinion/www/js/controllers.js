@@ -3,14 +3,14 @@ angular.module('app.controllers', [])
 .controller('aPPINIONCtrl', ['$scope', '$stateParams', '$state', 'BlankFactory',
     function($scope, $stateParams, $state, BlankFactory) {
 
-      $scope.instantize = function() {
-        setTimeout(function(){
-          $('#tags').children('input')[0].focus();
-        });
-      };
+        $scope.instantize = function() {
+            setTimeout(function() {
+                $('#tags').children('input')[0].focus();
+            });
+        };
 
-      var input = [];
-      var tagCollection = [];
+        var input = [];
+        var tagCollection = [];
 
         $(function() { // DOM ready
             // ::: TAGS BOX
@@ -50,8 +50,8 @@ angular.module('app.controllers', [])
             var parsedInput = [];
             console.log('inputArray = ' + inputArray);
             for (var i = 0; i < inputArray.length; i++) {
-              console.log('tag ' + i + ' = ' + inputArray[i].innerText);
-              parsedInput.push(inputArray[i].innerText);
+                console.log('tag ' + i + ' = ' + inputArray[i].innerText);
+                parsedInput.push(inputArray[i].innerText);
             }
             console.log('parsedInput = ' + parsedInput);
 
@@ -64,13 +64,13 @@ angular.module('app.controllers', [])
         }
 
         $scope.newSearch = function() {
-          $('#tags').children('span').remove();
-          console.log($('#tags'));
-          setTimeout(function(){
-            $('#tags').children('input')[0].focus();
-          });
+            $('#tags').children('span').remove();
+            console.log($('#tags'));
+            setTimeout(function() {
+                $('#tags').children('input')[0].focus();
+            });
 
-          $scope.chartProvider = false;
+            $scope.chartProvider = false;
 
         }
 
@@ -90,24 +90,29 @@ angular.module('app.controllers', [])
         link: function($scope, $element, $attr) {
             console.log('Scope', $scope);
 
+
             function initialize() {
 
                 Morris.Donut({
-                    element: 'donut-example',
+                    element: 'donut-appinion',
                     data: [
                         { label: "Negative", value: $scope.waarde },
                         { label: "Positive", value: 100 - $scope.waarde }
                     ],
+
                     colors: [
-                        'tomato',
-                        '#39B580',
-                        'wheat'
+                        'red',
+                        '#39B580'
                     ],
                     resize: true
+                }).on('click', function(i, row) {
+                    console.log(i, row);
                 });
-            } // end fn initialize
+            }
+
 
             if (document.readyState === "complete") {
+
                 console.log('initialize');
                 initialize();
             } else {
