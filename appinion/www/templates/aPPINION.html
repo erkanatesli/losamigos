@@ -1,19 +1,19 @@
 <ion-view hide-nav-bar="true" hide-back-button="false" view-title="" id="page1" class="signup-background">
     <ion-content padding="true" class="has-header">
         <div ng-controller="aPPINIONCtrl" ng-init="instantize()">
-            <form id="aPPINION-form1" class="list" ng-submit="submit()">
-                <label class="item item-input" id="tags">
-                    <input type="text" ng-model="input" id="inputfield" placeholder="Type keyword(s)">
-                </label>
-            </form>
-            <button id="aPPINION-button4" class="button button-positive button-block" ng-click="showPopularKW = !showPopularKW" style="height:20px; width:20px;float:right;margin-top:-70px;margin-right:5px;z-index:100;">V</button>
-            <div ng-show="showPopularKW">
-                <div style="margin-top:-15px; margin-bottom:5px; color: #ffffff; font-size:14px;">Popular keywords:</div>
-                <span ng-repeat="word in popularKeywords">
+          <form id="aPPINION-form1" class="list" ng-submit="submit()">
+            <label class="item item-input" id="tags">
+              <input type="text" ng-model="input" id="inputfield" placeholder="Type keyword(s)">
+            </label>
+          </form>
+          <button id="aPPINION-button4" class="button button-positive button-block" ng-click="showPopularKW = !showPopularKW" style="height:20px; width:20px;float:right;margin-top:-70px;margin-right:5px;z-index:100; font-size:16px;"><strong class="ion-ios-timer-outline"></strong></button>
+          <button id="aPPINION-button3" style="border-width: 2px; border-color: white" class="button button-positive  button-block" ng-click="submit()">Search opinions</button>
+          <div ng-show="showPopularKW">
+              <div style="margin-top:-5px; margin-bottom:5px; color: #ffffff; font-size:14px;">Popular keywords:</div>
+              <span ng-repeat="word in popularKeywords">
                 <button style="display: inline; background-color: white; width:10em; border:0; margin:2px;text-align:left;padding:5px 10px" ng-click="setInput(word)">{{word}} </button>
               </span>
-            </div>
-            <button id="aPPINION-button3" style="border-width: 2px; border-color: white" class="button button-positive  button-block" ng-click="submit()">Search opinions</button>
+          </div>
             <div class="card" ng-if="infoAvailable">
                 <div class="item item-text-wrap">
                     We have scanned {{data.debug.found_sources}} sources for you which the certainty is {{data.certainty*100 | number : 1}}%

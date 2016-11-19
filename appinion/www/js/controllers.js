@@ -15,6 +15,7 @@ angular.module('app.controllers', [])
         var input = [];
         var tagCollection = [];
         $scope.popularKeywords = ['Trump', 'Iphone', 'Capgemini', 'Azure', 'Domino\s'];
+        $scope.showPopularKW = true;
 
         $(function() { // DOM ready
             // ::: TAGS BOX
@@ -88,7 +89,7 @@ angular.module('app.controllers', [])
                         console.log('Response: ', response);
                         $scope.data = response;
                         $scope.infoAvailable = true;
-
+                        $scope.showPopularKW = false;
                         $scope.trust_value = Math.ceil((0.5 + (response.trust_value * 0.5)) * 100);
                         $scope.certainty = Math.ceil((0.5 + (response.certainty * 0.5)) * 100);
 
@@ -107,6 +108,7 @@ angular.module('app.controllers', [])
             });
             $scope.infoAvailable = false;
 $scope.startScreen = true;
+            $scope.showPopularKW = true;
 
         }
         $scope.setInput = function(word) {
