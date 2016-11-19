@@ -11,7 +11,7 @@
           <div ng-show="showPopularKW">
               <div style="margin-top:-5px; margin-bottom:5px; color: #ffffff; font-size:14px;">Popular keywords:</div>
               <span ng-repeat="word in popularKeywords">
-                <button style="display: inline; background-color: white; width:10em; border:0; margin:2px;text-align:left;padding:5px 10px" ng-click="setInput(word)">{{word}} </button>
+                <button style="display: inline; background-color: white; min-width:5em; border:0; margin:2px;padding:5px 10px" ng-click="setInput(word)">{{word}} </button>
               </span>
           </div>
             <div class="card" ng-if="infoAvailable">

@@ -14,7 +14,7 @@ angular.module('app.controllers', [])
 
         var input = [];
         var tagCollection = [];
-        $scope.popularKeywords = ['Trump', 'Iphone', 'Capgemini', 'Azure', 'Domino\s'];
+        $scope.popularKeywords = ['Trump', 'Iphone', 'Capgemini', 'Azure', 'Domino\s', 'Watson', 'AWS', 'stroopwafel', 'Neubourg', 'Toyota', 'Ferrari'];
         $scope.showPopularKW = true;
 
         $(function() { // DOM ready
@@ -108,7 +108,7 @@ angular.module('app.controllers', [])
                 $('#tags').children('input')[0].focus();
             });
             $scope.infoAvailable = false;
-$scope.startScreen = true;
+            $scope.startScreen = true;
             $scope.showPopularKW = true;
 
         }
