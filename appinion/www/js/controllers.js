@@ -43,6 +43,27 @@ angular.module('app.controllers', [])
         $scope.infoAvailable = false;
         $scope.waarde = 90;
 
+        window.Morris.Donut.prototype.setData = function(data, redraw) {
+            if (redraw == null) {
+                redraw = true;
+            }
+            this.data = data;
+            this.values = (function() {
+                var _i, _len, _ref, _results;
+                _ref = this.data;
+                _results = [];
+                for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+                    row = _ref[_i];
+                    _results.push(parseFloat(row.value));
+                }
+                return _results;
+            }).call(this);
+            this.dirty = true;
+            if (redraw) {
+                return this.redraw();
+            }
+        }
+
 
         $scope.submit = function() {
             setTimeout(function() {
@@ -61,6 +82,8 @@ angular.module('app.controllers', [])
                         $scope.infoAvailable = true;
                         $scope.waarde = Math.ceil((0.5 + (response.trust_value * 0.5)) * 100);
                         $scope.data = response;
+
+
                         console.log('Percentage: ', $scope.waarde, '%');
                     });
             }, 100);
@@ -80,27 +103,56 @@ angular.module('app.controllers', [])
     }
 ])
 
-.directive('appiniondonut', function() {
+.directive('appiniondonut', function($window) {
     // var toDestroy = angular.element(document.querySelector('#chartjs'));
     // toDestroy.remove();
     // console.info('directive appiniondonut');
     return {
         restrict: 'E',
-        scope: {
-            onCreate: '&',
-            waarde: '='
-        },
-        link: function($scope, $element, $attr) {
-            console.log('Scope', $scope);
+        replace: true,
+        link: function($scope, $element, attrs) {
+            console.log('link directive', $scope);
 
+            var morris;
+            angular.element($window).bind('resize', function() {
+                if (morris) {
+                    console.log('morris resized');
+                    morris.redraw();
+                }
+            });
+
+            attrs.$observe('value', function(val) {
+                console.log('VALUE changed', val, $scope)
+                console.log('Morris', morris);
+                if (!morris) {
+                    console.log('creating chart');
+
+                    if (document.readyState === "complete") {
+
+                        console.log('initialize');
+                        initialize();
+                    } else {
+                        initialize(); // had to force start it :(
+                        console.info('event.addDomListener');
+                        // Morris.Donut.event.addDomListener(window, 'load', initialize);
+                    }
+
+                } else {
+                    console.log('setting chart waarde');
+                    morris.setData([
+                        { label: "Negative", value: 100 - parseInt(attrs.value), formatted: 100 - parseInt(attrs.value) + '%' },
+                        { label: "Positive", value: parseInt(attrs.value), formatted: parseInt(attrs.value) + '%' }
+                    ]);
+                }
+            });
 
             function initialize() {
-
-                Morris.Donut({
+                console.log('Atrrs', attrs);
+                morris = Morris.Donut({
                     element: 'donut-appinion',
                     data: [
-                        { label: "Negative", value: 100 - $scope.waarde, formatted: 100 - $scope.waarde + '%' },
-                        { label: "Positive", value: $scope.waarde, formatted: $scope.waarde + '%' }
+                        { label: "Negative", value: 100 - parseInt(attrs.value), formatted: 100 - parseInt(attrs.value) + '%' },
+                        { label: "Positive", value: parseInt(attrs.value), formatted: parseInt(attrs.value) + '%' }
                     ],
                     formatter: function(x, data) {
                         return data.formatted;
@@ -117,15 +169,6 @@ angular.module('app.controllers', [])
             }
 
 
-            if (document.readyState === "complete") {
-
-                console.log('initialize');
-                initialize();
-            } else {
-                initialize(); // had to force start it :(
-                console.info('event.addDomListener');
-                // Morris.Donut.event.addDomListener(window, 'load', initialize);
-            }
         }
     }
 })

@@ -4,8 +4,8 @@ angular.module('app.services', [])
 
     function getAnalysis(parameters) {
         console.log('getAnalysis', parameters);
-        var url = 'http://demo8089816.mockable.io/search';
-        // var url = 'http://node2.codenvy.io:37975/appinion-service/public/api/v1/search?query=' + parameters + '&debug=1';
+        // var url = 'http://demo8089816.mockable.io/search';
+        var url = 'http://nadiahagen.nl/appinion-service/public/api/v1/search?query=' + parameters + '&debug=1';
         console.log('URL:', url);
         // var postData = {
         //     parameters: parameters

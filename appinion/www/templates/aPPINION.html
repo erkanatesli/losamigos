@@ -16,7 +16,7 @@
                     We have scanned {{data.debug.found_sources}} sources for you which the certainty is {{data.certainty*100 | number : 1}}%
                 </div>
             </div>
-            <appiniondonut ng-if="infoAvailable" waarde="waarde">
+            <appiniondonut ng-if="infoAvailable" data-value="{{waarde}}">
                 <div id="donut-appinion" style="height: 300px; width: 100%;"></div>
                 <!--<center>-->
                 <!--<button id="aPPINION-button4" style="width: 50%; padding-bottom:20px" class="button button-clear button-positive" ng-click="submit()">More details</button>-->
