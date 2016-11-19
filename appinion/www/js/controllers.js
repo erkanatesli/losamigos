@@ -44,29 +44,28 @@ angular.module('app.controllers', [])
         $scope.waarde = 90;
 
 
-        $scope.submit = function() {
-            var inputArray = $('#tags').children("span");
-            var parsedInput = [];
-            console.log('inputArray = ' + inputArray);
-            console.log('length = ' + inputArray.length);
+      $scope.submit = function() {
+        setTimeout(function() {
+          var inputArray = $('#tags').children("span");
+          var parsedInput = [];
+          console.log('inputArray = ' + inputArray);
+          for (var i = 0; i < inputArray.length; i++) {
+            console.log('tag ' + i + ' = ' + inputArray[i].innerText);
+            parsedInput.push(inputArray[i].innerText);
+          }
+          console.log('parsedInput = ' + parsedInput);
+          BlankFactory.getAnalysis(parsedInput)
+            .then(function(response) {
+              console.log('response', response);
 
-            for (var i = 0; i < inputArray.length; i++) {
-                console.log('tag ' + i + ' = ' + inputArray[i].innerText);
-                parsedInput.push(inputArray[i].innerText);
-            }
-            // console.log('parsedInput = ' + parsedInput);
+              $scope.chartProvider = true;
 
-            BlankFactory.getAnalysis(parsedInput)
-                .then(function(response) {
-                    console.log('response', response);
+              $scope.waarde = Math.ceil((0.5 + (response.trust_value * 0.5)) * 100);
 
-                    $scope.chartProvider = true;
-
-                    $scope.waarde = Math.ceil((0.5 + (response.trust_value * 0.5)) * 100);
-                    
-                    console.log('Percentage: ', $scope.waarde, '%');
-                });
-        }
+              console.log('Percentage: ', $scope.waarde, '%');
+            });
+        },100);
+      };
 
         $scope.newSearch = function() {
             $('#tags').children('span').remove();
@@ -106,7 +105,7 @@ angular.module('app.controllers', [])
                         { label: "Positive", value: $scope.waarde, formatted: $scope.waarde + '%' }
                     ],
                     formatter: function(x, data) {
-                        return data.formatted; 
+                        return data.formatted;
                     },
                     labelColor: '#387ef5',
                     colors: [
