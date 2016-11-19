@@ -3,8 +3,14 @@ angular.module('app.controllers', [])
 .controller('aPPINIONCtrl', ['$scope', '$stateParams', '$state', 'BlankFactory',
     function($scope, $stateParams, $state, BlankFactory) {
 
-        var input = [];
-        var tagCollection = [];
+      $scope.instantize = function() {
+        setTimeout(function(){
+          $('#tags').children('input')[0].focus();
+        });
+      };
+
+      var input = [];
+      var tagCollection = [];
 
         $(function() { // DOM ready
             // ::: TAGS BOX
@@ -46,8 +52,8 @@ angular.module('app.controllers', [])
             var parsedInput = [];
             console.log('inputArray = ' + inputArray);
             for (var i = 0; i < inputArray.length; i++) {
-                console.log('tag ' + i + ' = ' + inputArray[i].innerText);
-                parsedInput.push(inputArray[i].innerText);
+              console.log('tag ' + i + ' = ' + inputArray[i].innerText);
+              parsedInput.push(inputArray[i].innerText);
             }
             console.log('parsedInput = ' + parsedInput);
 
@@ -57,6 +63,17 @@ angular.module('app.controllers', [])
                     $scope.waarde = response.rating;
                     console.log('response', response);
                 });
+        }
+
+        $scope.newSearch = function() {
+          $('#tags').children('span').remove();
+          console.log($('#tags'));
+          setTimeout(function(){
+            $('#tags').children('input')[0].focus();
+          });
+
+          $scope.chartProvider = false;
+
         }
 
     }
