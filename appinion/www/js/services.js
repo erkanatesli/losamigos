@@ -5,14 +5,17 @@ angular.module('app.services', [])
     function getAnalysis(parameters) {
         console.log('getAnalysis', parameters);
         // var url = 'http://demo8089816.mockable.io/search';
-        var url = 'http://nadiahagen.nl/appinion-service/public/api/v1/search?query=' + parameters + '&debug=1';
+        var url = 'http://nadiahagen.nl/appinion-service/public/api/v1/search?query=' + parameters + '&debug=1' + "&mts=100";
         console.log('URL:', url);
         // var postData = {
         //     parameters: parameters
         // };
 
         var deferred = $q.defer();
-        $ionicLoading.show();
+        $ionicLoading.show({
+          template: 'Looking for sources...'
+        });
+
 
         $http({
                 url: url,
