@@ -27,7 +27,7 @@ angular.module('app.controllers', [])
               // console.log('first element - ' + tagCollection[0]);
               $(this).focusout();
             }
-            if(ev.which == '8') {
+            if(ev.which == '8' && this.value == '') {
               $(this).prev().remove(); }
           }
         });
@@ -43,9 +43,10 @@ angular.module('app.controllers', [])
         var connectionURL = 'http://demo8089816.mockable.io/search';
 
         $scope.submit = function() {
-            console.log('initial input = ' + $scope.input);
-            input = $scope.input.split(" ");
-            console.log('launching request with tags:' + input);
+            var inputArray = $('#tags').children("span");
+            console.log($('#tags').children("span")[0]);
+            console.log('initial input = ' + inputArray[0]);
+            console.log('launching request with tags:' + inputArray[0]);
             BlankFactory.postFunction(connectionURL, $scope.input)
                 .then(function(response) {
                     $scope.chartProvider = true;
