@@ -17,25 +17,25 @@ angular.module('app.controllers', [])
             if(txt) $("<span/>",{text:txt.toLowerCase(), insertBefore:this});
             this.value="";
           },
-          keyup : function(ev) {
-            // if: comma|enter (delimit more keyCodes with | pipe)
-
-            if(/(188|13|32)/.test(ev.which)) {
-              // tagCollection.push(this.value);
-              console.log($(this));
-              // console.log('collection - ' + tagCollection);
-              // console.log('first element - ' + tagCollection[0]);
-              $(this).focusout();
-            }
-            if(ev.which == '8' && this.value == '') {
-              $(this).prev().remove(); }
+          keydown: function(ev) {
+            // if backspace and this.value empty then remove previous tag
+            if (ev.which == '8' && this.value === '') { $(this).prev().remove(); }
+          },
+          keyup: function(ev) {
+            // if space|semi-colon|komma add tag start new
+            if (ev.which == '32' || ev.which == '186' || ev.which == '188') { $(this).focusout(); }
           }
+
         });
-        $('#tags').on('click', 'span', function() {
-          if(confirm("Remove "+ $(this).text() +"?")) $(this).remove();
+        $('#tags').unbind().on({
+          click : function() {
+              console.log($(this));
+              // $(this)[0].remove();
+            }
+          })
         });
 
-      });
+
 
         $scope.chartProvider = false;
         $scope.waarde = 90;
@@ -44,10 +44,16 @@ angular.module('app.controllers', [])
 
         $scope.submit = function() {
             var inputArray = $('#tags').children("span");
-            console.log($('#tags').children("span")[0]);
-            console.log('initial input = ' + inputArray[0]);
-            console.log('launching request with tags:' + inputArray[0]);
-            BlankFactory.postFunction(connectionURL, $scope.input)
+            var parsedInput = [];
+            console.log('inputArray = ' + inputArray);
+            for (var i = 0; i < inputArray.length; i++) {
+              console.log('tag ' + i + ' = ' + inputArray[i].innerText);
+              parsedInput.push(inputArray[i].innerText);
+            }
+            console.log('parsedInput = ' + parsedInput);
+
+
+            BlankFactory.postFunction(connectionURL, parsedInput)
                 .then(function(response) {
                     $scope.chartProvider = true;
                     $scope.waarde = response.rating;
