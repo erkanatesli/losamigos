@@ -5,7 +5,7 @@ angular.module('app.services', [])
     function getAnalysis(parameters) {
         console.log('getAnalysis', parameters);
         // var url = 'http://demo8089816.mockable.io/search';
-        var url = 'http://nadiahagen.nl/appinion-service/public/api/v1/search?query=' + parameters + '&debug=1' + "&mts=100";
+        var url = 'http://nadiahagen.nl/appinion-service/public/api/v1/search?query=' + parameters + '&debug=1' + "&mts=10";
         console.log('URL:', url);
         // var postData = {
         //     parameters: parameters
@@ -15,7 +15,6 @@ angular.module('app.services', [])
         $ionicLoading.show({
           template: 'Looking for sources...'
         });
-
 
         $http({
                 url: url,
@@ -34,9 +33,6 @@ angular.module('app.services', [])
                 deferred.reject(data);
             });
         return deferred.promise;
-
-
-
     }
 
     return {
