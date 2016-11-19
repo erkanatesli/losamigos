@@ -3,9 +3,12 @@ angular.module('app.controllers', [])
 .controller('aPPINIONCtrl', ['$scope', '$stateParams', '$state', 'BlankFactory',
     function($scope, $stateParams, $state, BlankFactory) {
 
+
+
         $scope.instantize = function() {
             setTimeout(function() {
                 $('#tags').children('input')[0].focus();
+                $("#aPPINION-button3")[0].disabled = true;
             });
         };
 
@@ -19,11 +22,15 @@ angular.module('app.controllers', [])
                     var txt = this.value.replace(/[^a-z0-9\+\-\.\#] /ig, ''); // allowed characters
                     txt = this.value.replace(/;|,/g, ''); // Not allowed characters
                     if (txt) $("<span/>", { text: txt, insertBefore: this });
+                    $("#aPPINION-button3")[0].disabled = false;
                     this.value = "";
                 },
                 keydown: function(ev) {
                     // if backspace and this.value empty then remove previous tag
                     if (ev.which == '8' && this.value === '') { $(this).prev().remove(); }
+                    if ($('#tags').children("span").length === 0) {
+                      $("#aPPINION-button3")[0].disabled = true;
+                    }
                 },
                 keyup: function(ev) {
                     // if enter|semi-colon|komma add tag start new

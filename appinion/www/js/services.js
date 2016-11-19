@@ -16,7 +16,6 @@ angular.module('app.services', [])
           template: 'Looking for sources...'
         });
 
-
         $http({
                 url: url,
                 // data: postData,
@@ -34,9 +33,6 @@ angular.module('app.services', [])
                 deferred.reject(data);
             });
         return deferred.promise;
-
-
-
     }
 
     return {
