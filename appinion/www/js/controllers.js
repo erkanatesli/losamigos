@@ -16,10 +16,8 @@ angular.module('app.controllers', [])
             // ::: TAGS BOX
             $("#tags input").unbind().on({
                 focusout: function() {
-                    console.log(this.value);
                     var txt = this.value.replace(/[^a-z0-9\+\-\.\#] /ig, ''); // allowed characters
                     txt = this.value.replace(/;|,/g, ''); // Not allowed characters
-                    console.log(txt);
                     if (txt) $("<span/>", { text: txt, insertBefore: this });
                     this.value = "";
                 },
