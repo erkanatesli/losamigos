@@ -40,32 +40,31 @@ angular.module('app.controllers', [])
             });
         });
 
-        $scope.chartProvider = false;
+        $scope.infoAvailable = false;
         $scope.waarde = 90;
 
 
-      $scope.submit = function() {
-        setTimeout(function() {
-          var inputArray = $('#tags').children("span");
-          var parsedInput = [];
-          console.log('inputArray = ' + inputArray);
-          for (var i = 0; i < inputArray.length; i++) {
-            console.log('tag ' + i + ' = ' + inputArray[i].innerText);
-            parsedInput.push(inputArray[i].innerText);
-          }
-          console.log('parsedInput = ' + parsedInput);
-          BlankFactory.getAnalysis(parsedInput)
-            .then(function(response) {
-              console.log('response', response);
+        $scope.submit = function() {
+            setTimeout(function() {
+                var inputArray = $('#tags').children("span");
+                var parsedInput = [];
+                console.log('inputArray = ' + inputArray);
+                for (var i = 0; i < inputArray.length; i++) {
+                    console.log('tag ' + i + ' = ' + inputArray[i].innerText);
+                    parsedInput.push(inputArray[i].innerText);
+                }
+                console.log('parsedInput = ' + parsedInput);
+                BlankFactory.getAnalysis(parsedInput)
+                    .then(function(response) {
+                        console.log('response', response);
 
-              $scope.chartProvider = true;
-
-              $scope.waarde = Math.ceil((0.5 + (response.trust_value * 0.5)) * 100);
-
-              console.log('Percentage: ', $scope.waarde, '%');
-            });
-        },100);
-      };
+                        $scope.infoAvailable = true;
+                        $scope.waarde = Math.ceil((0.5 + (response.trust_value * 0.5)) * 100);
+                        $scope.data = response;
+                        console.log('Percentage: ', $scope.waarde, '%');
+                    });
+            }, 100);
+        };
 
         $scope.newSearch = function() {
             $('#tags').children('span').remove();
@@ -74,7 +73,7 @@ angular.module('app.controllers', [])
                 $('#tags').children('input')[0].focus();
             });
 
-            $scope.chartProvider = false;
+            $scope.infoAvailable = false;
 
         }
 
@@ -84,7 +83,7 @@ angular.module('app.controllers', [])
 .directive('appiniondonut', function() {
     // var toDestroy = angular.element(document.querySelector('#chartjs'));
     // toDestroy.remove();
-    console.info('directive appiniondonut');
+    // console.info('directive appiniondonut');
     return {
         restrict: 'E',
         scope: {
@@ -96,7 +95,6 @@ angular.module('app.controllers', [])
 
 
             function initialize() {
-
 
                 Morris.Donut({
                     element: 'donut-appinion',
