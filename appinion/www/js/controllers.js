@@ -11,6 +11,7 @@ angular.module('app.controllers', [])
 
         var input = [];
         var tagCollection = [];
+        $scope.popularKeywords = ['Trump', 'Iphone', 'Capgemini', 'Azure', 'Domino\s'];
 
         $(function() { // DOM ready
             // ::: TAGS BOX
@@ -97,6 +98,9 @@ angular.module('app.controllers', [])
 
             $scope.infoAvailable = false;
 
+        }
+        $scope.setInput = function(word) {
+          $scope.input = word;
         }
 
     }
