@@ -21,12 +21,13 @@ angular.module('app.controllers', [])
             // if: comma|enter (delimit more keyCodes with | pipe)
 
             if(/(188|13|32)/.test(ev.which)) {
-              tagCollection.push(this.value);
-              console.log('collection - ' + tagCollection);
-              console.log('first element - ' + tagCollection[0]);
+              // tagCollection.push(this.value);
+              console.log($(this));
+              // console.log('collection - ' + tagCollection);
+              // console.log('first element - ' + tagCollection[0]);
               $(this).focusout();
             }
-            if((/8/).test(ev.which)) $(this).remove();
+            if(ev.which == '8') { $(this).prev().remove(); }
           }
         });
         $('#tags').on('click', 'span', function() {
