@@ -58,9 +58,13 @@ angular.module('app.controllers', [])
 
             BlankFactory.getAnalysis(parsedInput)
                 .then(function(response) {
-                    $scope.chartProvider = true;
-                    $scope.waarde = response.rating;
                     console.log('response', response);
+
+                    $scope.chartProvider = true;
+
+                    $scope.waarde = Math.ceil((0.5 + (response.trust_value * 0.5)) * 100);
+                    
+                    console.log('Percentage: ', $scope.waarde, '%');
                 });
         }
 
@@ -98,10 +102,12 @@ angular.module('app.controllers', [])
                 Morris.Donut({
                     element: 'donut-appinion',
                     data: [
-                        { label: "Negative", value: $scope.waarde, formatted: $scope.waarde + '%' },
-                        { label: "Positive", value: 100 - $scope.waarde, formatted: 100-$scope.waarde + '%' }
+                        { label: "Negative", value: 100 - $scope.waarde, formatted: 100 - $scope.waarde + '%' },
+                        { label: "Positive", value: $scope.waarde, formatted: $scope.waarde + '%' }
                     ],
-                    formatter: function (x, data) { return data.formatted; },
+                    formatter: function(x, data) {
+                        return data.formatted; 
+                    },
                     labelColor: '#387ef5',
                     colors: [
                         'red',
