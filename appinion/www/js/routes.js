@@ -11,12 +11,12 @@ angular.module('app.routes', [])
 
 
         .state('aPPINION', {
-        url: '/page1',
+        url: '/index',
         templateUrl: 'templates/aPPINION.html',
         controller: 'aPPINIONCtrl'
     })
 
-    $urlRouterProvider.otherwise('/page1')
+    $urlRouterProvider.otherwise('/index')
 
 
 
