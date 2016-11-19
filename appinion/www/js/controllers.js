@@ -102,6 +102,7 @@ angular.module('app.controllers', [])
 
         $scope.newSearch = function() {
             $('#tags').children('span').remove();
+            $("#aPPINION-button3")[0].disabled = true;
             console.log($('#tags'));
             setTimeout(function() {
                 $('#tags').children('input')[0].focus();
