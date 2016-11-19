@@ -1,26 +1,26 @@
 <ion-view title="APPINION" id="page1" class="signup-background">
     <ion-content padding="true" class="has-header">
         <form id="aPPINION-form1" class="list">
-          <div class="container">
-          <!--<label class="item item-input" id="tags">-->
-            <!--<input type="text" value="" ng-model="inputfield" placeholder="Add a tag" />-->
-          <!--</label>-->
-          <label class="item item-input" id="tags">
-          <input type="text" ng-model="input" placeholder="Type keyword(s)">
-          </label>
+            <div class="container">
+                <!--<label class="item item-input" id="tags">-->
+                <!--<input type="text" value="" ng-model="inputfield" placeholder="Add a tag" />-->
+                <!--</label>-->
+                <label class="item item-input" id="tags">
+                    <input type="text" ng-model="input" placeholder="Type keyword(s)">
+                </label>
         </form>
         <div ng-controller="aPPINIONCtrl">
             <button id="aPPINION-button3" class="button button-positive  button-block" ng-click="submit()">Search opinions</button>
-          <br/>
-          <br/>
-          <br/>
+            <br/>
+            <br/>
+            <br/>
             <appiniondonut ng-if="chartProvider" waarde="waarde">
                 <div id="donut-example" style="height: 300px; width: 100%;"></div>
-              <center>
-              <button id="aPPINION-button4" style="width: 50%" class="row-center button button-positive  button-block" ng-click="submit()">Gimme more donuts!</button>
-              </center>
+                <center>
+                    <button id="aPPINION-button4" style="width: 50%" class="row-center button button-positive  button-block" ng-click="submit()">Gimme more donuts!</button>
+                </center>
             </appiniondonut>
         </div>
-      </div>
+        </div>
     </ion-content>
 </ion-view>

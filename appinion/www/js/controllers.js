@@ -6,14 +6,11 @@ angular.module('app.controllers', [])
       var input = [];
       var tagCollection = [];
 
-
       $(function(){ // DOM ready
-
         // ::: TAGS BOX
         $("#tags input").unbind().on({
           focusout : function() {
             var txt = this.value.replace(/[^a-z0-9\+\-\.\#]/ig,''); // allowed characters
-
             if(txt) $("<span/>",{text:txt.toLowerCase(), insertBefore:this});
             this.value="";
           },
@@ -25,7 +22,6 @@ angular.module('app.controllers', [])
             // if space|semi-colon|komma add tag start new
             if (ev.which == '32' || ev.which == '186' || ev.which == '188') { $(this).focusout(); }
           }
-
         });
         $('#tags').unbind().on({
           click : function() {
@@ -34,8 +30,6 @@ angular.module('app.controllers', [])
             }
           })
         });
-
-
 
         $scope.chartProvider = false;
         $scope.waarde = 90;
@@ -51,7 +45,6 @@ angular.module('app.controllers', [])
               parsedInput.push(inputArray[i].innerText);
             }
             console.log('parsedInput = ' + parsedInput);
-
 
             BlankFactory.postFunction(connectionURL, parsedInput)
                 .then(function(response) {
