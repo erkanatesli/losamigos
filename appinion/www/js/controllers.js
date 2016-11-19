@@ -93,6 +93,7 @@ angular.module('app.controllers', [])
 
             function initialize() {
 
+
                 Morris.Donut({
                     element: 'donut-appinion',
                     data: [
