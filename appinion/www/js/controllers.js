@@ -98,10 +98,11 @@ angular.module('app.controllers', [])
                 Morris.Donut({
                     element: 'donut-appinion',
                     data: [
-                        { label: "Negative", value: $scope.waarde },
-                        { label: "Positive", value: 100 - $scope.waarde }
+                        { label: "Negative", value: $scope.waarde, formatted: $scope.waarde + '%' },
+                        { label: "Positive", value: 100 - $scope.waarde, formatted: 100-$scope.waarde + '%' }
                     ],
-
+                    formatter: function (x, data) { return data.formatted; },
+                    labelColor: '#387ef5',
                     colors: [
                         'red',
                         '#39B580'
