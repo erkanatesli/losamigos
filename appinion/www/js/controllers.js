@@ -10,7 +10,7 @@ angular.module('app.controllers', [])
       $(function(){ // DOM ready
 
         // ::: TAGS BOX
-        $("#tags input").on({
+        $("#tags input").unbind().on({
           focusout : function() {
             var txt = this.value.replace(/[^a-z0-9\+\-\.\#]/ig,''); // allowed characters
 
@@ -27,7 +27,8 @@ angular.module('app.controllers', [])
               // console.log('first element - ' + tagCollection[0]);
               $(this).focusout();
             }
-            if(ev.which == '8') { $(this).prev().remove(); }
+            if(ev.which == '8') {
+              $(this).prev().remove(); }
           }
         });
         $('#tags').on('click', 'span', function() {
