@@ -23,6 +23,11 @@ angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.directives
             // org.apache.cordova.statusbar required
             StatusBar.styleDefault();
         }
+
+        // ionic.Platform.fullScreen();
+        // if (window.StatusBar) {
+        //     return StatusBar.hide();
+        // }
     });
 })
 
