@@ -115,29 +115,29 @@ angular.module('app.controllers', [])
             var morris;
             angular.element($window).bind('resize', function() {
                 if (morris) {
-                    console.log('morris resized');
+                    // console.log('morris resized');
                     morris.redraw();
                 }
             });
 
             attrs.$observe('value', function(val) {
-                console.log('VALUE changed', val, $scope)
-                console.log('Morris', morris);
+                // console.log('VALUE changed', val, $scope)
+                // console.log('Morris', morris);
                 if (!morris) {
                     console.log('creating chart');
 
                     if (document.readyState === "complete") {
 
-                        console.log('initialize');
+                        // console.log('initialize');
                         initialize();
                     } else {
                         initialize(); // had to force start it :(
-                        console.info('event.addDomListener');
+                        // console.info('event.addDomListener');
                         // Morris.Donut.event.addDomListener(window, 'load', initialize);
                     }
 
                 } else {
-                    console.log('setting chart waarde');
+                    // console.log('setting chart waarde');
                     morris.setData([
                         { label: "Negative", value: 100 - parseInt(attrs.value), formatted: 100 - parseInt(attrs.value) + '%' },
                         { label: "Positive", value: parseInt(attrs.value), formatted: parseInt(attrs.value) + '%' }
