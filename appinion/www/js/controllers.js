@@ -41,7 +41,7 @@ angular.module('app.controllers', [])
         });
 
         $scope.infoAvailable = false;
-
+        $scope.startScreen = true;
         window.Morris.Donut.prototype.setData = function(data, redraw) {
             if (redraw == null) {
                 redraw = true;
@@ -65,6 +65,7 @@ angular.module('app.controllers', [])
 
 
         $scope.submit = function() {
+            $scope.startScreen = false;
             setTimeout(function() {
                 var inputArray = $('#tags').children("span");
                 var parsedInput = [];
@@ -94,11 +95,9 @@ angular.module('app.controllers', [])
             setTimeout(function() {
                 $('#tags').children('input')[0].focus();
             });
-
             $scope.infoAvailable = false;
-
-        }
-
+                        $scope.startScreen = true;
+        };
     }
 ])
 

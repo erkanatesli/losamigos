@@ -12,6 +12,11 @@
                     We have scanned {{data.debug.found_sources}} sources for you which the certainty is {{data.certainty*100 | number : 1}}%
                 </div>
             </div>
+            <div class="card" ng-if="startScreen">
+                <div class="item item-text-wrap">
+                    Hi! Welcome to appionion. <br/> Enter some words and press search to get the overall opinion!
+                </div>
+            </div>
             <appiniondonut ng-if="infoAvailable" data-value="{{waarde}}">
                 <div id="donut-appinion" style="height: 300px; width: 100%;"></div>
                 <center style="padding-top:30px">
