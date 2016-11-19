@@ -3,6 +3,12 @@ angular.module('app.controllers', [])
 .controller('aPPINIONCtrl', ['$scope', '$stateParams', '$state', 'BlankFactory',
     function($scope, $stateParams, $state, BlankFactory) {
 
+      $scope.instantize = function() {
+        setTimeout(function(){
+          $('#tags').children('input')[0].focus();
+        });
+      };
+
       var input = [];
       var tagCollection = [];
 
@@ -26,6 +32,7 @@ angular.module('app.controllers', [])
         $('#tags').unbind().on({
           click : function() {
               console.log($(this));
+
               // $(this)[0].remove();
             }
           })
@@ -52,6 +59,17 @@ angular.module('app.controllers', [])
                     $scope.waarde = response.rating;
                     console.log('response', response);
                 });
+        }
+
+        $scope.newSearch = function() {
+          $('#tags').children('span').remove();
+          console.log($('#tags'));
+          setTimeout(function(){
+            $('#tags').children('input')[0].focus();
+          });
+
+          $scope.chartProvider = false;
+
         }
 
     }
